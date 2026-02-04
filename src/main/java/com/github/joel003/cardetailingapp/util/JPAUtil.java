@@ -14,21 +14,35 @@ public class JPAUtil {
         try {
             Map<String, String> props = new HashMap<>();
 
+            // 1. Get the raw DATABASE_URL provided by Railway
             String dbUrl = System.getenv("DATABASE_URL");
 
-            if (dbUrl == null) {
-                throw new RuntimeException("DATABASE_URL not set");
+            if (dbUrl == null || dbUrl.isEmpty()) {
+                throw new RuntimeException("DATABASE_URL environment variable is missing!");
+            }
+
+            // 2. Convert postgres:// to jdbc:postgresql://
+            if (dbUrl.startsWith("postgres://")) {
+                dbUrl = dbUrl.replace("postgres://", "jdbc:postgresql://");
+            }
+
+            // 3. Append SSL mode (Required for most cloud-hosted DBs)
+            if (!dbUrl.contains("?")) {
+                dbUrl += "?sslmode=require";
+            } else if (!dbUrl.contains("sslmode")) {
+                dbUrl += "&sslmode=require";
             }
 
             props.put("javax.persistence.jdbc.url", dbUrl);
-            props.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
 
-            emf = Persistence.createEntityManagerFactory(
-                    "carDetailingPU", props
-            );
+            // Note: Since DATABASE_URL already contains the username and password,
+            // the driver will extract them automatically.
+
+            emf = Persistence.createEntityManagerFactory("carDetailingPU", props);
 
         } catch (Exception e) {
-            throw new ExceptionInInitializerError(e);
+            e.printStackTrace(); // This will show in Railway logs
+            throw new ExceptionInInitializerError("JPA Initialization Failed: " + e.getMessage());
         }
     }
 
@@ -36,4 +50,3 @@ public class JPAUtil {
         return emf.createEntityManager();
     }
 }
-
