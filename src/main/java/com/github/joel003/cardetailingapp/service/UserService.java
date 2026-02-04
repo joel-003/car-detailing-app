@@ -37,7 +37,7 @@ public class UserService {
         if (BCrypt.checkpw(user.getPassword(), userFromDB.getPassword())) {
             return userFromDB;
         } else {
-            throw new RuntimeException("Incorrect Password");
+            return null;
         }
     }
 
