@@ -53,6 +53,7 @@ public class LoginServlet extends HttpServlet {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             req.setAttribute("error", e.getMessage());
             RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
             dispatcher.forward(req, resp);
