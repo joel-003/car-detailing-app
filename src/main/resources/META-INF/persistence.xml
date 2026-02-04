@@ -11,12 +11,31 @@
         <class>com.github.joel003.cardetailingapp.model.Booking</class>
 
         <properties>
+
+            <property name="javax.persistence.jdbc.driver"
+                      value="org.postgresql.Driver"/>
+
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}"/>
+
+            <property name="javax.persistence.jdbc.user"
+                      value="${PGUSER}"/>
+
+            <property name="javax.persistence.jdbc.password"
+                      value="${PGPASSWORD}"/>
+
             <property name="hibernate.dialect"
                       value="org.hibernate.dialect.PostgreSQLDialect"/>
 
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
-            <property name="hibernate.show_sql" value="false"/>
-            <property name="hibernate.format_sql" value="false"/>
+            <property name="hibernate.hbm2ddl.auto"
+                      value="validate"/>
+
+            <property name="hibernate.show_sql"
+                      value="false"/>
+
+            <property name="hibernate.format_sql"
+                      value="false"/>
+
         </properties>
     </persistence-unit>
 </persistence>
