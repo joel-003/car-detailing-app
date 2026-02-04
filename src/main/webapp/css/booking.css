@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #ffffff;
+    color: var(--black);
+    line-height: 1.6;
+}
+.booking-container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.summary-box {
+    background: #E9002D;
+    padding: 15px;
+    color: #fff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.confirm-btn {
+    width: 100%;
+    padding: 14px;
+    background: #E9002D;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.confirm-btn:hover {
+    background: #b00022;
+}
+
+.error {
+    background: #ffdddd;
+    border-left: 4px solid red;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.booking-success {
+    text-align: center;
+    padding: 30px;
+}
+
+.booking-success h2 {
+    color: #16a34a;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.booking-success p {
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.my-booking-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #E9002D;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.my-booking-btn:hover {
+    background: #b00022;
+}

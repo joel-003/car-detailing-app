@@ -1,0 +1,96 @@
+:root {
+    --red: #E9002D;
+    --dark: #0A0A0A;
+    --white: #FFFFFF;
+    --gray: #D9D9D9;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.upgrade-hero {
+    background: var(--red);
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.upgrade-content {
+    max-width: 780px;
+}
+
+.section-label {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+}
+
+.upgrade-title {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.upgrade-subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 25px;
+    max-width: 550px;
+}
+
+.benefits-list {
+    list-style: disc;
+    margin-left: 20px;
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+.benefits-list li {
+    margin-bottom: 8px;
+}
+
+.upgrade-box {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    color: black;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+}
+
+.plan-title {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.plan-price {
+    font-size: 34px;
+    font-weight: 800;
+    margin: 10px 0;
+}
+
+.plan-desc {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.upgrade-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: var(--red);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.upgrade-btn:hover {
+    background: #b40023;
+}
