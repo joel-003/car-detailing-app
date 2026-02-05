@@ -89,7 +89,7 @@ graph TD;
     A["JSP Pages (View)"] --> B["Servlets (Controller)"];
     B --> C["Service Layer"];
     C --> D["DAO Layer (JPA)'];
-    D --> E['PostgreSQL (Railway)"];
+    D --> E['PostgreSQL (Railway)"]
     C --> F["Models / Entities"];
 
 ```
