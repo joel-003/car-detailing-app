@@ -86,11 +86,11 @@ The app follows a professional MVC architecture and includes: ✔ Secure User Au
 
 ```mermaid
 graph TD;
-    A[JSP Pages (View)] --> B[Servlets (Controller)];
-    B --> C[Service Layer];
-    C --> D[DAO Layer (JPA)];
-    D --> E[PostgreSQL (Railway)];
-    C --> F[Models / Entities];
+    A["JSP Pages (View)"] --> B["Servlets (Controller)"];
+    B --> C["Service Layer"];
+    C --> D["DAO Layer (JPA)'];
+    D --> E['PostgreSQL (Railway)"];
+    C --> F["Models / Entities"];
 
 ```
 
@@ -149,8 +149,6 @@ Set these environment variables in your local IDE or server:
 mvn clean package -DskipTests
 ```
 - Deploy the target/ROOT.war file to your Tomcat webapps/ folder.
-```
-
 
 ## ▶️ Main Servlet Endpoints
 
@@ -174,12 +172,6 @@ Click below to view all screenshots:
 
 - Static JPAUtil initializer with safe EntityManagerFactory handling.
 
-```
-- Custom exception:
-```
-throw new InvalidInputException("Invalid input!");
-
-```
 ## 🔮 Future Enhancements
 
 * Integrated Payment Gateway (Stripe/PayPal)
