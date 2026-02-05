@@ -39,6 +39,39 @@ public class JPAUtil {
             e.printStackTrace();
             throw new ExceptionInInitializerError(e);
         }
+    }static {
+        try {
+            Map<String, String> props = new HashMap<>();
+            String dbUrl = System.getenv("DATABASE_URL");
+
+            if (dbUrl == null || dbUrl.isEmpty()) {
+                throw new RuntimeException("DATABASE_URL is missing! Check Railway Variables.");
+            }
+
+            // 1. CRITICAL: Handle both postgres:// and postgresql:// prefixes
+            // The driver only understands jdbc:postgresql://
+            if (dbUrl.startsWith("postgres://")) {
+                dbUrl = dbUrl.replace("postgres://", "jdbc:postgresql://");
+            } else if (dbUrl.startsWith("postgresql://")) {
+                dbUrl = dbUrl.replace("postgresql://", "jdbc:postgresql://");
+            }
+
+            // 2. Add SSL if not already present (required by most cloud DBs)
+            if (!dbUrl.contains("sslmode")) {
+                dbUrl += (dbUrl.contains("?") ? "&" : "?") + "sslmode=require";
+            }
+
+            props.put("javax.persistence.jdbc.url", dbUrl);
+            props.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
+
+            emf = Persistence.createEntityManagerFactory("carDetailingPU", props);
+
+        } catch (Exception e) {
+            // Log to System.err so you see the specific failure reason in Railway
+            System.err.println("FATAL: JPA Initializer failed with URL: " + System.getenv("DATABASE_URL"));
+            e.printStackTrace();
+            throw new ExceptionInInitializerError(e);
+        }
     }
 
     public static EntityManager getEntityManager() {
