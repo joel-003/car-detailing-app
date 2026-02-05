@@ -163,7 +163,7 @@ mvn clean package -DskipTests
 
 Click below to view all screenshots:
 
-👉 [Open Screenshots Folder](BMI-Health-App-Screenshot/)
+👉 [Open Screenshots Folder](Car-detailng-screenshot/)
 
 ## 🛡️ Exception Handling
 - Custom InvalidInputException for robust data entry checks.
