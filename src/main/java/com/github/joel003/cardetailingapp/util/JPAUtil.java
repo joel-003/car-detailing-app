@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JPAUtil {
-
     private static final EntityManagerFactory emf;
 
     static {
@@ -16,17 +15,15 @@ public class JPAUtil {
             String dbUrl = System.getenv("DATABASE_URL");
 
             if (dbUrl == null || dbUrl.isEmpty()) {
-                throw new RuntimeException("DATABASE_URL environment variable is missing!");
+                throw new RuntimeException("DATABASE_URL variable is missing from Railway settings.");
             }
 
-            // Convert postgres:// or postgresql:// to jdbc:postgresql://
+            // Convert protocol: postgres:// -> jdbc:postgresql://
             if (dbUrl.startsWith("postgres://")) {
                 dbUrl = dbUrl.replace("postgres://", "jdbc:postgresql://");
-            } else if (dbUrl.startsWith("postgresql://")) {
-                dbUrl = dbUrl.replace("postgresql://", "jdbc:postgresql://");
             }
 
-            // Ensure sslmode=require is present for Railway
+            // Cloud databases often require SSL
             if (!dbUrl.contains("sslmode")) {
                 dbUrl += (dbUrl.contains("?") ? "&" : "?") + "sslmode=require";
             }
@@ -34,14 +31,16 @@ public class JPAUtil {
             props.put("javax.persistence.jdbc.url", dbUrl);
             props.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
 
-            // Use the persistence unit name defined in your persistence.xml
+            // Match the name exactly from your persistence.xml
             emf = Persistence.createEntityManagerFactory("carDetailingPU", props);
-
         } catch (Exception e) {
+            // Log the error to the console so it appears in Railway logs
+            System.err.println("JPA Initialization Failed: " + e.getMessage());
             e.printStackTrace();
-            throw new ExceptionInInitializerError("JPA Initialization Failed: " + e.getMessage());
+            throw new ExceptionInInitializerError(e);
         }
     }
+
     public static EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
