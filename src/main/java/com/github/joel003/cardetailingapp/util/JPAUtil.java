@@ -13,39 +13,35 @@ public class JPAUtil {
     static {
         try {
             Map<String, String> props = new HashMap<>();
-
-            // 1. Get the raw DATABASE_URL provided by Railway
             String dbUrl = System.getenv("DATABASE_URL");
 
             if (dbUrl == null || dbUrl.isEmpty()) {
-                throw new RuntimeException("DATABASE_URL environment variable is missing!");
+                throw new RuntimeException("DATABASE_URL is missing from environment variables.");
             }
 
-            // 2. Convert postgres:// to jdbc:postgresql://
+            // 1. Convert protocol for JDBC compatibility
             if (dbUrl.startsWith("postgres://")) {
                 dbUrl = dbUrl.replace("postgres://", "jdbc:postgresql://");
             }
 
-            // 3. Append SSL mode (Required for most cloud-hosted DBs)
-            if (!dbUrl.contains("?")) {
-                dbUrl += "?sslmode=require";
-            } else if (!dbUrl.contains("sslmode")) {
-                dbUrl += "&sslmode=require";
+            // 2. Append SSL requirements for Railway/Cloud DBs
+            if (!dbUrl.contains("sslmode")) {
+                dbUrl += (dbUrl.contains("?") ? "&" : "?") + "sslmode=require";
             }
 
             props.put("javax.persistence.jdbc.url", dbUrl);
+            props.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
 
-            // Note: Since DATABASE_URL already contains the username and password,
-            // the driver will extract them automatically.
-
+            // 3. Initialize the Factory with overridden properties
             emf = Persistence.createEntityManagerFactory("carDetailingPU", props);
 
         } catch (Exception e) {
-            e.printStackTrace(); // This will show in Railway logs
-            throw new ExceptionInInitializerError("JPA Initialization Failed: " + e.getMessage());
+            // Log to System.err to ensure it appears in Railway's console
+            System.err.println("CRITICAL: JPA Initialization Failed");
+            e.printStackTrace();
+            throw new ExceptionInInitializerError(e);
         }
     }
-
     public static EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
