@@ -2,7 +2,7 @@
 
 <h1 align="center">🚗 Joe Detailing – Premium Car Wash Web App</h1> <p align="center">A premium JSP + Servlet web application for managing car detailing services, memberships, and client bookings.</p>
 
-<p align="center"> <a href="https://joe-detailing.up.railway.app"> <img src="https://img.shields.io/badge/Live_Demo-Visit_Website-red?style=for-the-badge&logo=google-chrome&logoColor=white" /> </a> </p>
+<p align="center"> <a href="https://joe-detailing.up.railway.app/index.jsp"> <img src="https://img.shields.io/badge/Live_Demo-Visit_Website-red?style=for-the-badge&logo=google-chrome&logoColor=white" /> </a> </p>
 
 ## Badges
 
