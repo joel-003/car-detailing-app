@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(value = "/login")
+@WebServlet(value = "${pageContext.request.contextPath}/login")
 public class LoginServlet extends HttpServlet {
 
     private final UserService userService;

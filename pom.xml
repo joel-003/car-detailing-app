@@ -74,7 +74,7 @@
                 <version>3.4.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <warName>car-detailing</warName>
+                    <warName>ROOT</warName>
                 </configuration>
             </plugin>
             <plugin>
